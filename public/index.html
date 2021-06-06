@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Find the word</title>
+  <script>
+  // Sample Quiz with LPIC-1 Exam 101 Questions bundled
+  window.Quiz = {
+    // Title heading of the quiz
+    title: 'LPIC-1 Exam 101 Quiz',
+    // Description of the quiz
+    description: 'The LPIC-1 certification (Linux Administrator) of the Linux Professional Institute requires passing the exams 101 and 102. This Quiz contains 20 questions focused on the 101 Exam topics, which you have to answer in 30 Minutes.',
+    // (Maximum) Number of Questions
+    questionCount: 20,
+    // Duration in minutes
+    duration: 30,
+    // Randomize the quiz and questions (if the pool is larger)
+    randomize: true,
+    // API Endpoint for reporting or suggesting questions (Quiz server)
+    // Without, reporting or suggesting questions isn't possible.
+    apiEndpoint: 'http://localhost:5000',
+    // Link to a JSON file or REST API server
+    questionsEndpoint: '/sample-questions-lpic101.json',
+    // questionsEndpoint: 'http://localhost:5000/load-config',
+    // Show the custom Quiz builder on startup and not the Quiz
+    // customizeQuiz: true
+  };
+  </script>
+</head>
+<body>
+<noscript>
+  <strong>We're sorry but the Quiz doesn't work properly without JavaScript enabled. Please enable
+    it to continue.</strong>
+</noscript>
+<div id="app"></div>
+</body>
+</html>

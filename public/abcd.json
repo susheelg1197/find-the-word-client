@@ -1,0 +1,43 @@
+[
+  {
+      "title": "ghj *dash* xyz ",
+      "category": "GRE",
+      "kind": "multiple",
+      "difficulty": "3",
+      "answers": [
+          {
+              "content": "a"
+          },
+          {
+              "content": "b"
+          },
+          {
+              "content": "c"
+          },
+          {
+              "content": "d"
+          },
+          {
+              "content": "e"
+          },
+          {
+              "content": "f"
+          },
+          {
+              "content": "g"
+          },
+          {
+              "content": "h"
+          },
+          {
+              "content": "i"
+          }
+      ],
+      "resolution": [
+          0,
+          1,
+          2
+      ],
+      "explanation":"aaaaaaaaaaa"
+  }
+]
