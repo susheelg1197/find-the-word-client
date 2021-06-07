@@ -233,7 +233,6 @@ export default {
         this.activeQuestion.isCorrect = this.activeQuestion.resolution.includes(val);
       }
 
-      // console.log(this.activeQuestion);
 
       this.nextQuestion();
     },

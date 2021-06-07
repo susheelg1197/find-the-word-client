@@ -136,7 +136,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.answers)
     this.firstArray = [this.question.answers[0], this.question.answers[1],this.question.answers[2]];
     this.secondArray = [this.question.answers[3], this.question.answers[4],this.question.answers[5]];
     this.thirdArray = [this.question.answers[6], this.question.answers[7],this.question.answers[8]];

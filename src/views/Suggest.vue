@@ -164,7 +164,6 @@ export default {
         submission.resolution = [submission.resolution];
       }
 
-      console.log(JSON.stringify(submission));
 
       // For now
       this.$http

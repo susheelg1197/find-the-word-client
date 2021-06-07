@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     submit() {
-      console.log(JSON.stringify(this.report));
 
       // For now
       this.$http
