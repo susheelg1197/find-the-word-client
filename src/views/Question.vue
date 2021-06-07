@@ -1,7 +1,7 @@
 <template>
 <div class="quiz-question text-left">
   <div class="question-title text-center">
-    <h3>{{ question.title }}</h3>
+    <h3>{{ question.title }} </h3>
     <p class="text-italic" v-show="question.kind === 'single'">
       {{ $t('choose_the_most_appropriate') }}
     </p>
@@ -25,34 +25,51 @@
       v-if="question.kind === 'single'">
   </single-question>
 
-  <multiple-question
+  <!-- <multiple-question
       :question.sync="question"
       :resolve="resolve"
       :sendAnswer="answer"
       v-if="question.kind === 'multiple'">
-  </multiple-question>
-
-  <text-question
+  </multiple-question> -->
+  <double-blank
       :question.sync="question"
       :resolve="resolve"
       :sendAnswer="answer"
-      v-if="question.kind === 'text'">
-  </text-question>
+      v-if="question.kind === 'double'">
+  </double-blank>
+<triple-blank
+      :question.sync="question"
+      :resolve="resolve"
+      :sendAnswer="answer"
+      v-if="question.kind === 'triple'">
+  </triple-blank>
+  <sentence-equivalence
+      :question.sync="question"
+      :resolve="resolve"
+      :sendAnswer="answer"
+      v-if="question.kind === 'sentence_equivalence'">
+  </sentence-equivalence>
 
 </div>
 </template>
 
 <script>
 import SingleQuestion from './questions/SingleQuestion';
-import MultipleQuestion from './questions/MultipleQuestion';
+// import MultipleQuestion from './questions/MultipleQuestion';
 import TextQuestion from './questions/TextQuestion';
+import TripleBlank from './questions/TripleBlank.vue';
+import DoubleBlank from './questions/DoubleBlank.vue';
+import SentenceEquivalence from './questions/SentenceEquivalence.vue';
 
 export default {
   name: 'Question',
   components: {
     TextQuestion,
-    MultipleQuestion,
+    DoubleBlank,
+    // MultipleQuestion,
     SingleQuestion,
+    TripleBlank,
+    SentenceEquivalence,
   },
   props: ['question', 'resolve'],
   computed: {

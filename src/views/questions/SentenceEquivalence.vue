@@ -1,22 +1,30 @@
 <template>
-<div class="single-question quiz-answers">
-  <div :class="answers.includes(index) ? 'checked-option': 'option'" v-for="(answer, index) in question.answers.slice(0,5)" class="quiz-answer" :key="answer.text">
+<div class="multiple-question quiz-answers">
+  <div
+    v-for="(answer, index) in question.answers.slice(0,6)"
+    class="quiz-answer"
+    :key="answer.text"
+    :class="answers.includes(index) ? 'checked-option': 'option'"
+    :disabled="resolve"
+  >
     <button
       class="btn btn-action btn-answer"
+      :disabled="resolve"
       @click="toggleAnswer(index)"
       :class="getButtonClass(index)"
-      :disabled="resolve"
     >
       <span class="question-num">{{indexToLetter(index)}}.</span>
       {{ answer.content }}
     </button>
 
-
     <!-- <blockquote class="quiz-explanation" v-if="resolve">
       <i class="icon icon-message"></i> {{ answer.explanation }}
     </blockquote> -->
   </div>
-<div class="nav-question text-right" v-show="!resolve">
+<blockquote class="quiz-explanation" v-if="resolve">
+      <i class="icon icon-message"></i> {{ question.explanation }}
+    </blockquote>
+  <div class="nav-question text-right" v-show="!resolve">
     <button class="btn btn-primary" @click="answer">{{ $t('answer') }}</button>
   </div>
 </div>
@@ -24,26 +32,27 @@
 
 <script>
 export default {
-  name: 'SingleQuestion',
+  name: 'SentenceEquivalence',
   props: ['question', 'resolve', 'sendAnswer'],
-  data(){
-    return{
-      answers:[],
-    }
-  },
   methods: {
+    answer() {
+      if (!this.answers && this.question.answer && this.question.answer.length) {
+        // Answers from previous
+        this.sendAnswer(JSON.parse(JSON.stringify(this.question.answer)));
+      }
+
+      this.sendAnswer(JSON.parse(JSON.stringify(this.answers.sort())));
+      this.answers = [];
+    },
+
     toggleAnswer(index) {
       if (this.answers.includes(index)) {
         this.answers = this.answers.filter(item => item !== index);
       } else {
-        this.answers=[index];
+        this.answers.push(index);
       }
     },
-    answer(){
-      this.sendAnswer(JSON.parse(JSON.stringify(this.answers.sort())));
-      this.answers=[]
 
-    },
     getButtonClass(index) {
       const cl = [];
 
@@ -51,6 +60,7 @@ export default {
         cl.push(this.question.resolution.includes(index) ? 'option-correct' : 'option-wrong');
       }
 
+      // TODO fix for previous
       if (this.question.answer && this.question.answer.includes(index)) {
         cl.push('checked-option');
 
@@ -62,8 +72,14 @@ export default {
       return cl.join(' ');
     },
   },
+  data() {
+    return {
+      answers: [],
+    };
+  },
 };
 </script>
 
 <style scoped>
+
 </style>

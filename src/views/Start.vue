@@ -5,14 +5,17 @@
       v-for="(quiz, index) in quizes"
       :key="index"
     >
-      <h1>{{quiz.name}}</h1>
+      <h2>{{ quiz.name }}</h2>
 
       <div class="quiz-description col-7 col-sm-auto">
         {{ quiz.description }}
       </div>
 
       <div class="quiz-nav">
-        <button class="btn btn-primary btn-quiz-start" @click="$emit('start',quiz.name)">
+        <button
+          class="btn btn-primary btn-quiz-start"
+          @click="$emit('start', quiz.type)"
+        >
           {{ $t("start_quiz") }}
         </button>
       </div>
@@ -23,25 +26,38 @@
 
 <script>
 export default {
-  name: 'Start',
-  props: ['quiz'],
+  name: "Start",
+  props: ["quiz"],
   data() {
     return {
-      quizes: [{
-        name: 'Gre Rapid fire',
-        description: 'Gre rapid fire',
-
-      },
-      {
-        name: 'Gre Rapid fire2',
-        description: 'Gre rapid fire',
-
-      },
-      {
-        name: 'Gre Rapid fire3',
-        description: 'Gre rapid fire',
-
-      }],
+      quizes: [
+        {
+          name: "Gre Verbal Mixed Sentences",
+          type: "sentences",
+          description:
+            "A time based section (20Qs / 30min) consisting of GRE style questions of mixed category.",
+        },
+        {
+          name: "Gre Verbal Single Blank Sentences",
+          description: "A time based section (20Qs / 30min) consisting of GRE style questions of single blank category.",
+          type: "fb",
+        },
+        {
+          name: "Gre Verbal Double blank Sentences",
+          description: "A time based section (20Qs / 30min) consisting of GRE style questions of double blank category.",
+          type: "db",
+        },
+        {
+          name: "Gre Verbal Triple blank Sentences",
+          description: "A time based section (20Qs / 30min) consisting of GRE style questions of triple blank category.",
+          type: "tb",
+        },
+        {
+          name: "Gre Verbal Sentence Equivalence",
+          description: "A time based section (20Qs / 30min) consisting of GRE style questions of sentence equivalence category.",
+          type: "se",
+        },
+      ],
     };
   },
 };

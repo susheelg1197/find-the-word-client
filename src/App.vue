@@ -1,12 +1,30 @@
 <template>
+<div id="app">
+  <header-bar></header-bar>
 <div id="quiz">
   <router-view/>
 </div>
+<Footer></Footer>
+</div>
 </template>
+<script>
+import HeaderBar from './views/parts/HeaderBar.vue'
+import Footer from './views/parts/Footer.vue'
+export default {
+  components:{
+    HeaderBar,
+    Footer
+  }
+}
+</script>
+
 
 <style>
   @import './../node_modules/spectre.css/dist/spectre.min.css';
 
+#app {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
   /* Simple CSS for the Quiz */
   #quiz {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;

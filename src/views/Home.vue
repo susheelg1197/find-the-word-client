@@ -1,5 +1,8 @@
 <template>
+<div>
+
 <div class="bytee-quiz">
+  
   <error-renderer :message="errorMessage" :severity="errorSeverity"
                   @close="errorMessage = ''"></error-renderer>
 
@@ -79,10 +82,10 @@
           {{ $t('back_to_results') }}
         </button>
       </div>
-      <div class="column col-4 col-md-auto text-right" v-if="quiz.apiEndpoint">
+      <div class="column col-4 col-md-auto text-right">
         <router-link to="/suggest" target="_blank">{{ $t('suggest_question') }}</router-link>
         |
-        <router-link :to="{name: 'report', params: { id: activeQuestion._id } }"
+        <router-link :to="{name: 'report', params: { id: activeQuestion.index } }"
                      target="_blank">
           {{ $t('report_question') }}
         </router-link>
@@ -90,12 +93,13 @@
     </div>
   </div>
 </div>
+</div>
 </template>
 
 <script>
 import isEqual from 'lodash/isEqual';
 import shuffle from 'lodash/shuffle';
-
+import HeaderBar from './parts/HeaderBar.vue'
 import Start from './Start';
 import Question from './Question';
 import Result from './Result';
@@ -110,28 +114,30 @@ export default {
     Result,
     Question,
     Start,
+    HeaderBar,
   },
-  created() {
-    if (window.Quiz.customizeQuiz) {
-      this.$router.push('/customize');
-      return;
-    }
-
-    // Very simple load
-    this.$http
-      .get(this.quiz.questionsEndpoint)
-      .then((response) => {
-        this.prepareQuiz(response.data);
-      })
-      .catch((error) => {
-        this.errorMessage = error;
-        this.errorSeverity = 'error';
-      });
-  },
+  // created() {
+  //   if (window.Quiz.customizeQuiz) {
+  //     this.$router.push('/customize');
+  //     return;
+  //   }
+  //   // Very simple load
+  //   this.$http
+  //     .get('http://localhost:5000/load-random-'+this.type)
+  //     .then((response) => {
+  //       this.prepareQuiz(response.data);
+  //     })
+  //     .catch((error) => {
+  //       this.errorMessage = error;
+  //       this.errorSeverity = 'error';
+  //     });
+  //     this.questions=[]
+  // },
   methods: {
-    startQuiz() {
+    startQuiz(type) {
+      // this.type=type
       this.$http
-        .get('/abcd.json')
+        .get('http://localhost:5000/load-random-'+type)
         .then((response) => {
           this.prepareQuiz(response.data);
         })
@@ -177,7 +183,7 @@ export default {
           }
         });
 
-        question.answers = shuffle(question.answers);
+        // question.answers = shuffle(question.answers);
         question.resolution = [];
 
         question.answers.forEach((answer, index) => {
@@ -190,6 +196,7 @@ export default {
 
 
       this.questions = questions;
+      this.firstQuestion()
     },
 
     startTimer(duration) {
@@ -234,7 +241,6 @@ export default {
     // Navigation
     firstQuestion() {
       this.numQuestion = 0;
-
       this.activeQuestion = this.questions[this.numQuestion];
     },
 
@@ -290,6 +296,7 @@ export default {
   },
   data() {
     return {
+      type:'',
       // For now
       quiz: window.Quiz,
       questions: [],
