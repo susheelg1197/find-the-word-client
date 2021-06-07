@@ -137,7 +137,7 @@ export default {
     startQuiz(type) {
       // this.type=type
       this.$http
-        .get('http://localhost:5000/load-random-'+type)
+        .get('https://ssg-find-a-word.herokuapp.com/load-random-'+type)
         .then((response) => {
           this.prepareQuiz(response.data);
         })
