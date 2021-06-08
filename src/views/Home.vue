@@ -135,16 +135,21 @@ export default {
   // },
   methods: {
     startQuiz(type) {
-      // this.type=type
+this.$store.state.loader=true
+  // this.type=type
       this.$http
         .get('https://ssg-find-a-word.herokuapp.com/load-random-'+type)
         .then((response) => {
           this.prepareQuiz(response.data);
+          this.$store.state.loader=false
+          
         })
         .catch((error) => {
           this.errorMessage = error;
           this.errorSeverity = 'error';
         });
+      
+
       this.startTimer(this.quiz.duration * 60);
       this.nextQuestion();
     },

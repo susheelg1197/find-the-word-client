@@ -1,8 +1,14 @@
 <template>
+
 <div id="app">
+  <div class="preloader" v-show="$store.state.loader">
+    <img class="img-cls" src="../public/assets/ripple.gif">
+  </div>
+  <div v-show="!$store.state.loader">
   <header-bar></header-bar>
 <div id="quiz">
-  <router-view/>
+  <router-view  />
+  </div>
 </div>
 <Footer></Footer>
 </div>
@@ -14,14 +20,54 @@ export default {
   components:{
     HeaderBar,
     Footer
-  }
+  },
+  data(){
+    return{
+      loader:false,
+    }
+  },
+  methods:{
+   
+  },
+  created() {
+      }
 }
+
+
+
 </script>
 
 
 <style>
   @import './../node_modules/spectre.css/dist/spectre.min.css';
-
+  
+.preloader {
+  align-items: center;
+  background: white;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.3s linear;
+  width: 100%;
+  z-index: 9999;
+}
+.img-wrapper{
+  display: flex;
+justify-content: center;
+}
+.img-cls{
+ width:200px
+}
+.filter-loader{
+  -webkit-filter: blur(8px);
+-moz-filter: blur(8px);
+-ms-filter: blur(8px);
+-o-filter: blur(8px);
+filter: blur(8px);
+}
 #app {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }

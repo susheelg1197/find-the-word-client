@@ -6,6 +6,9 @@ import router from './router';
 import Question from './mixins/Question';
 import i18n from './i18n';
 import 'mdb-vue-ui-kit/css/mdb.min.css';
+import store from './store'
+
+
 
 
 var VueScrollactive = require('vue-scrollactive');
@@ -18,6 +21,7 @@ Vue.mixin(Question);
 
 new Vue({
   router,
+  store,
   i18n,
   render: h => h(App),
 }).$mount('#app');
