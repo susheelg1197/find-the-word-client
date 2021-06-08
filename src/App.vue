@@ -35,13 +35,19 @@ export default {
     HeaderBar,
     Footer,
   },
+  
   data() {
     return {
+      checkInternetConnection:navigator.onLine,
       loader: false,
     };
   },
   methods: {},
-  created() {},
+  created() {
+    if(!navigator.onLine){
+      window.open(window.location.origin+'/static/index.html',"_self")
+    }
+  },
 };
 </script>
 

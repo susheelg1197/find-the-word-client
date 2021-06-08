@@ -51,7 +51,7 @@
   <!-- Quiz Nav, TODO MOVE -->
   <div class="quiz-nav" v-if="numQuestion !== -1 && numQuestion !== questions.length">
     <div class="columns">
-      <div class="column col-8 col-md-12">
+      <div class="column col-12 ">
         <button
             class="btn btn-primary"
             v-if="!resolveResolution && numQuestion !== 0"
@@ -82,7 +82,7 @@
           {{ $t('back_to_results') }}
         </button>
       </div>
-      <div class="column col-4 col-md-auto text-right">
+      <div class="column col-12 text-center mt-2">
         <router-link to="/suggest" target="_blank">{{ $t('suggest_question') }}</router-link>
         |
         <router-link :to="{name: 'report', params: { id: activeQuestion.index } }"
@@ -116,6 +116,7 @@ export default {
     Start,
     HeaderBar,
   },
+  
   // created() {
   //   if (window.Quiz.customizeQuiz) {
   //     this.$router.push('/customize');
@@ -147,6 +148,7 @@ this.$store.state.loader=true
         .catch((error) => {
           this.errorMessage = error;
           this.errorSeverity = 'error';
+          window.open(window.location.origin+'/static/index.html',"_self")
         });
       
 
