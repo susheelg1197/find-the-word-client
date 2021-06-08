@@ -49,6 +49,9 @@
           <p>
             Susheel Gounder
           </p>
+          <p>
+            Nikita More
+          </p>
         </div>
         <!-- Grid column -->
 
